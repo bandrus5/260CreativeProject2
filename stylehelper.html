@@ -20,26 +20,26 @@
         <div class="col-sm">
           <p>Trouble words:</p>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
+            <input class="form-check-input" type="checkbox" value="" id="veryCheck">
+            <label class="form-check-label" for="veryCheck">
               Very
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-            <label class="form-check-label" for="defaultCheck2">
+            <input class="form-check-input" type="checkbox" value="" id="literallyCheck">
+            <label class="form-check-label" for="literallyCheck">
               Literally
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-            <label class="form-check-label" for="defaultCheck3">
+            <input class="form-check-input" type="checkbox" value="" id="reallyCheck">
+            <label class="form-check-label" for="reallyCheck">
               Really
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-            <label class="form-check-label" for="defaultCheck4">
+            <input class="form-check-input" type="checkbox" value="" id="badAdverbCheck">
+            <label class="form-check-label" for="badAdverbCheck">
               Other -ly adverbs (Thanks Hemmingway)
             </label>
           </div>
@@ -47,14 +47,14 @@
         <div class="col-sm">
           <p>Sentence Structure:</p>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
-            <label class="form-check-label" for="defaultCheck5">
+            <input class="form-check-input" type="checkbox" value="" id="sentenceLengthCheck">
+            <label class="form-check-label" for="sentenceLengthCheck">
               Repeated sentence length
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
-            <label class="form-check-label" for="defaultCheck6">
+            <input class="form-check-input" type="checkbox" value="" id="repeatWordCheck">
+            <label class="form-check-label" for="repeatWordCheck">
               Repeated first word
             </label>
           </div>
@@ -62,24 +62,34 @@
         <div class="col-sm">
           <p>Punctuation that should be used sparingly:</p>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
-            <label class="form-check-label" for="defaultCheck7">
+            <input class="form-check-input" type="checkbox" value="" id="bangCheck">
+            <label class="form-check-label" for="bangCheck">
               Exclamation point
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="ellipsisCheck">
+            <label class="form-check-label" for="ellipsisCheck">
+              Ellipsis (...)
             </label>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="inputarea">
+  <div id="inputarea" class="inputarea">
     <p>Enter your story here:</p>
     <textarea class="maininput" id="maintextarea"></textarea>
     <button type="button" class="btn btn-secondary btn-lg" id="startanalysis">Analyze!</button>
+  </div>
+
+  <div id="outputarea">
   </div>
 
   <script src="analyze.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>
