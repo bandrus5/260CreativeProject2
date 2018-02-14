@@ -208,7 +208,7 @@ function findAdverbs(words, sentences) {
   var currentLyIndex = 0;
   for (var i = 0; i < words.length; i++) {
       var word = words[i];
-      if (word.value.endsWith("ly")) {
+      if (word.value.endsWith("ly") && word.value.toLowerCase() !== "really" && word.value.toLowerCase() !== "literally") {
            lyWords.push(word);
            var thisIndex = i;
            $.ajax({
