@@ -195,7 +195,7 @@ function findBang(words) {
     return;
   }
   words.forEach(function(element) {
-      if(element.value === "!") {
+      if(element.value.includes("!")) {
         element.marked = true;
         element.markedVal = 6;
       }
@@ -203,6 +203,9 @@ function findBang(words) {
 }
 
 function findAdverbs(words, sentences) {
+  if (!$('#badAdverbCheck').is(':checked')) {
+    return;
+  }
   var lyWords = [];
   var currentLyIndex = 0;
   for (var i = 0; i < words.length; i++) {
@@ -242,6 +245,52 @@ function findAdverbs(words, sentences) {
   pasteText(sentences);
 }
 
+
+/*
+function findPassiveVoice(sentences) {
+  if (!$('#passiveCheck').is(':checked')) {
+    return;
+  }
+  sentenceSpots = [];
+  wordSpots = [];
+  currentIndex = 0;
+  toBeList = ["been", "be", "being", "am", "are", "is", "was", "were"];
+  for (var i = 0; i < sentences.length; i++) {
+      for (var j = 0; j < sentences[i].words.length; j++) {
+          if ($.inArray(sentences[i].words[j].value.toLowerCase(), toBeList) >= 0) {
+              console.log("Found value: " + sentences[i].words[j].value);
+              sentenceSpots.push(i);
+              wordSpots.push(j);
+              var str = sentences[sentenceSpots[currentIndex]].words[wordSpots[currentIndex] + 1].value;
+              console.log(str);
+              $.ajax({
+              type : "GET",
+              url : "https://wordsapiv1.p.mashape.com/words/" + str + "/definitions",
+              headers: {"X-Mashape-Key": "8HXj2NNzKGmshlvmsSxIoHzgJ4NKp12ajddjsnyPge7H9FIMc8", "X-Mashape-Host": "wordsapiv1.p.mashape.com"},
+              datatype: "json",
+              success : function(result) {
+                  for (var k = 0; k < result.definitions.length; k++) {
+                    if (result.definitions[j].partOfSpeech === "verb") {
+                       sentences[sentenceSpots[currentIndex]].words[wordSpots[currentIndex] + 1].marked = true;
+                       sentences[sentenceSpots[currentIndex]].words[wordSpots[currentIndex] + 1].markedVal = 103;
+                       sentences[sentenceSpots[currentIndex]].words[wordSpots[currentIndex]].marked = true;
+                       sentences[sentenceSpots[currentIndex]].words[wordSpots[currentIndex]].markedVal = 103;
+                    }
+                  }
+                  pasteText(sentences);
+                  currentIndex++;
+              },
+              error : function(result) {
+                 console.log("Could not find word: " + sentences[sentenceSpots[currentIndex]].words[wordSpots[currentIndex] + 1].value);
+                 currentIndex++;
+              }
+            });
+          }
+      }
+  }
+}
+*/
+
 function analyze() {
     var allwords = document.getElementById("maintextarea").value;
     var words;
@@ -253,9 +302,11 @@ function analyze() {
     findTroubleWord(words, "very", 1);
     findTroubleWord(words, "literally", 2);
     findTroubleWord(words, "really", 3);
+    findBang(words);
     checkSentenceLength(sentences);
     checkFirstWords(sentences);
     findAdverbs(words, sentences);
+  //  findPassiveVoice(sentences);
     pasteText(sentences);
 }
 

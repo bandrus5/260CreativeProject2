@@ -26,6 +26,10 @@ label {
   padding-left: 10px;
 }
 
+#punctuation {
+  display: none;
+}
+
 #accordion {
   width: 70%;
   margin: 0 auto;
@@ -102,7 +106,7 @@ label {
 .highlighted103 {
   background-color: #999fff;
 }
-.highlighted104 {   
+.highlighted104 {
   background-color: #999fff;
   text-decoration: underline;
   color: green;
