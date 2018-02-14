@@ -7,94 +7,104 @@
   <link rel="stylesheet" href="styles.css">
   <title>Style Helper: Creative Writing Style Analysis</title>
 </head>
-<body>
+<body onload="setdefaultoptions()">
   <div class="heading">
     <h1>The Style Helper</h1>
     <h3>A dream come true for authors and editors alike.</h3>
   </div>
 
-  <div id="accordion">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            What is the Style Helper?
-          </button>
-        </h5>
-      </div>
+  <div id="demoTexts">
+    <p>Test it out with these demo chapters: </p>
+    <button type="button" class="btn btn-secondary demoButton" id="demoEragon"><u>Eragon</u> by Christopher Paolini</button>
+    <button type="button" class="btn btn-secondary demoButton" id="demoUncovered"><u>Uncovered</u> by Berkeley Andrus</button>
+  </div>
 
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
-          The Style Helper is software designed to help you as a writer (or editor) of creative fiction or non-fiction. It analyzes features of writing such
-          as sentence length and vocabulary to help you identify the strengths and weaknesses of your writing style and learn how to make your
-          novel or short story the best that it can be!
+  <div class="options">
+    <p>Select styles to mark:</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <p>Trouble words:</p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="veryCheck">
+            <label class="form-check-label" for="veryCheck">
+              Very
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="literallyCheck">
+            <label class="form-check-label" for="literallyCheck">
+              Literally
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="reallyCheck">
+            <label class="form-check-label" for="reallyCheck">
+              Really
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="badAdverbCheck">
+            <label class="form-check-label" for="badAdverbCheck">
+              Other -ly adverbs (Thanks Hemmingway)
+            </label>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingTwo">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            How do I use it?
-          </button>
-        </h5>
-      </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-        <div class="card-body">
-          The Style Helper is just that: a helper. You should NOT apply every suggestion it gives you! You're the writer, after all. If you disagree
-          with advice that the Style Helper gives, then trust yourself.
-          <p>Some things the style helper can do:</p>
-          <ul>
-            <li>Help you identify 'problem words' such as very, really, and literally</li>
-            <li>Point out repeated words and phrases that you may want to cut back on</li>
-            <li>Identify places where your sentence length might need to be more varied</li>
-          </ul>
-          Some things the style helper cannot do:
-          <ul>
-            <li>Tell you what to do! You're smarter than this thing, by far.</li>
-            <li>Guarentee you a best-selling novel. If it could, I would be writing a best-selling novel instead of this software</li>
-            <li>Fix your grammar and spelling. It would be better to use a word processor for that.</li>
-          </ul>
-          To use the style helper, click on "Try it out!" below, then follow the link. Post your writing into the Style Helper, and let it go to work!
-          We have found that it does best with 1000-3000 words at a time.
+        <div class="col-sm">
+          <p>Sentence Structure:</p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="sentenceLengthCheck">
+            <label class="form-check-label" for="sentenceLengthCheck">
+              Repeated sentence length
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="repeatWordCheck">
+            <label class="form-check-label" for="repeatWordCheck">
+              Repeated first word
+            </label>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingThree">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Try it out!
-          </button>
-        </h5>
-      </div>
-      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-        <div class="card-body">
-          Ready to try out the style helper? Click <a href="./stylehelper.html">here</a> to submit your writing for review!
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingFour">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-            Acknowledgements
-          </button>
-        </h5>
-      </div>
-      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-        <div class="card-body">
-          This software is based in part on the work of the following researchers: Peter Rosenthal, Patrick Madden, and Ben Blatt. Thank you for your
-          incredible contributions to the field!
+        <div id="punctuation" class="col-sm">
+          <p>Punctuation that should be used sparingly:</p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="bangCheck">
+            <label class="form-check-label" for="bangCheck">
+              Exclamation point
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="ellipsisCheck">
+            <label class="form-check-label" for="ellipsisCheck">
+              Ellipsis (...)
+            </label>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div id="inputarea" class="inputarea">
+    <p>Enter your story here:</p>
+    <textarea class="maininput" id="maintextarea"></textarea>
+    <button type="button" class="btn btn-secondary btn-lg" id="startanalysis">Analyze!</button>
+  </div>
+
+  <div id="goback">
+    <button type="button" class="btn btn-secondary btn-lg" id="reanalyze">Go back.</button>
+  </div>
+
+  <div id="outputarea">
+
+  </div>
 
 
-
+  <footer>
+      <p>Code for this site at <a href="https://github.com/BYU-CS260-Winter-2018/lab-2-bandrus5">https://github.com/BYU-CS260-Winter-2018/lab-2-bandrus5</a></p>
+  </footer>
+  <script src="analyze.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>
