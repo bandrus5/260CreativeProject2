@@ -97,7 +97,6 @@ function parseWords(allWords) {
 }
 
 function pasteText(sentences) {
-    document.getElementById("inputarea").style.display = "none";
     results = "<p>";
     for (i in sentences) {
         sentence = sentences[i];
@@ -289,6 +288,7 @@ function findPassiveVoice(sentences) {
 
 function analyze() {
     var allwords = document.getElementById("maintextarea").value;
+    document.getElementById("inputarea").style.display = "none";
     document.getElementById("goback").style.display = "block";
     $(function(){
       $("input.form-check-input").attr("disabled", true);

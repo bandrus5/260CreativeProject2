@@ -68,11 +68,10 @@ label {
 #goback {
   width: 70%;
   margin: 0 auto;
-  text-align: left;
+  text-align: right;
   display: none;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
-
 .highlighted {
   background-color: grey;
 }
@@ -127,6 +126,14 @@ label {
   text-decoration: underline;
   color: green;
   text-decoration-color: green;
+}
+#inputHeading {
+  width: 100%;
+}
+#startanalysis {
+  text-align: right;
+  float: right;
+  margin-bottom: 10px;
 }
 #outputarea {
   background-color: white;
