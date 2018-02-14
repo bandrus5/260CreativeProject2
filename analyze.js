@@ -23,7 +23,9 @@ function parseWords(allWords) {
     for (var i = 0; i < allWords.length; i++) {
       var c = allWords.charAt(i);
       if (c === '\n') {
-        sentence.words.push(word);
+        if (word.value.length > 0) {
+          sentence.words.push(word);
+        }
         sentence.words.push({
           value: "\n",
           marked: false,
@@ -40,6 +42,12 @@ function parseWords(allWords) {
           marked: false,
           markedVal: 0
         };
+        allInfo.sentences.push(sentence);
+        sentence = {
+          words: [],
+          marked: false,
+          markedVal: 0
+        }
         continue;
       }
       else if (c === ' ' || c === '\t') {
@@ -91,11 +99,9 @@ function parseWords(allWords) {
 function pasteText(sentences) {
     document.getElementById("inputarea").style.display = "none";
     results = "<p>";
-    console.log(sentences);
     for (i in sentences) {
         sentence = sentences[i];
         if (sentence.marked) {
-          console.log(sentence);
             results += "<span class=\"highlighted" + sentence.markedVal + "\">";
             for (j in sentence.words) {
               word = sentence.words[j];
@@ -115,7 +121,6 @@ function pasteText(sentences) {
             results += "</span>";
         }
         else {
-            console.log(sentence.words);
             for (j in sentence.words) {
               word = sentence.words[j];
               if ((word.value === '.' || word.value === '!' || word.value === '?') && (results.length > 3)) {
@@ -156,15 +161,15 @@ function checkSentenceLength(sentences) {
 }
 
 function checkFirstWords(sentences) {
+  console.log(sentences);
+  console.log("Checking first words.");
   if (!$('#repeatWordCheck').is(':checked')) {
     return;
   }
-  console.log(sentences);
+  console.log("Really checking first words.");
   for (var i = 1; i < sentences.length; i++) {
-     console.log(sentences[i].words[0].value);
-     console.log(sentences[i-1].words[0].value);
      if (sentences[i].words[0].value.toLowerCase() === sentences[i-1].words[0].value.toLowerCase()) {
-       console.log("They match");
+        console.log("Marking " + sentences[i].words[0]);
         sentences[i].words[0].marked = true;
         sentences[i].words[0].markedVal = 102;
         sentences[i-1].words[0].marked = true;
@@ -197,40 +202,45 @@ function findBang(words) {
   });
 }
 
-function findAdverbs(words) {
+function findAdverbs(words, sentences) {
+  var lyWords = [];
+  var currentLyIndex = 0;
   for (var i = 0; i < words.length; i++) {
-      if (words[i].endsWith("ly")) {
-          $.ajax({
+      var word = words[i];
+      if (word.value.endsWith("ly")) {
+           lyWords.push(word);
+           var thisIndex = i;
+           $.ajax({
            type : "GET",
-           url : "https://wordsapiv1.p.mashape.com/words/" + words[i] + "/definitions",
+           url : "https://wordsapiv1.p.mashape.com/words/" + words[thisIndex].value + "/definitions",
            headers: {"X-Mashape-Key": "8HXj2NNzKGmshlvmsSxIoHzgJ4NKp12ajddjsnyPge7H9FIMc8", "X-Mashape-Host": "wordsapiv1.p.mashape.com"},
            datatype: "json",
            success : function(result) {
-               console.log(result);
+               for (var j = 0; j < result.definitions.length; j++) {
+                 if (result.definitions[j].partOfSpeech === "adverb") {
+                    lyWords[currentLyIndex].marked = true;
+                    if (lyWords[currentLyIndex].markedVal == 102 || lyWords[currentLyIndex].markedVal == 104) {
+                       console.log("marking a previously marked");
+                       lyWords[currentLyIndex].markedVal = 104;
+                    }
+                    else {
+                       console.log("making a new mark");
+                       lyWords[currentLyIndex].markedVal = 4;
+                    }
+                 }
+               }
+               pasteText(sentences);
+               currentLyIndex++;
            },
            error : function(result) {
              console.log("Could not find word: " + words[i]);
+              currentLyIndex++;
            }
          });
       }
   }
+  pasteText(sentences);
 }
-
-function testAPI(word) {
-  $.ajax({
-   type : "GET",
-   url : "https://wordsapiv1.p.mashape.com/words/" + word + "/definitions",
-   headers: {"X-Mashape-Key": "8HXj2NNzKGmshlvmsSxIoHzgJ4NKp12ajddjsnyPge7H9FIMc8", "X-Mashape-Host": "wordsapiv1.p.mashape.com"},
-   datatype: "json",
-   success : function(result) {
-       console.log(result);
-   },
-   error : function(result) {
-     console.log(result);
-   }
- });
-}
-
 
 function analyze() {
     var allwords = document.getElementById("maintextarea").value;
@@ -245,9 +255,8 @@ function analyze() {
     findTroubleWord(words, "really", 3);
     checkSentenceLength(sentences);
     checkFirstWords(sentences);
+    findAdverbs(words, sentences);
     pasteText(sentences);
-    //testAPI("happy");
-    //testAPI("does");
 }
 
 document.getElementById("startanalysis").addEventListener("click", analyze);
